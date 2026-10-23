@@ -7,6 +7,9 @@
     "moregrid:dry_cell",
     "moregrid:buzzer",
     "moregrid:dip",
-    "moregrid:rotary_switch"
+    "moregrid:rotary_switch",
+    "moregrid:double_voltage_gauge",
+    "moregrid:double_current_gauge",
+    "moregrid:power_gauge"
   ]
 }

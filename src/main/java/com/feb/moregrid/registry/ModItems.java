@@ -27,7 +27,14 @@ public final class ModItems {
             ITEMS.registerSimpleItem("dip", new Item.Properties());
     public static final DeferredHolder<Item, Item> ROTARY_SWITCH =
             ITEMS.registerSimpleItem("rotary_switch", new Item.Properties());
+    public static final DeferredHolder<Item, Item> DOUBLE_CURRENT_GAUGE =
+            ITEMS.registerSimpleItem("double_current_gauge", new Item.Properties());
+    public static final DeferredHolder<Item, Item> DOUBLE_VOLTAGE_GAUGE =
+            ITEMS.registerSimpleItem("double_voltage_gauge", new Item.Properties());
+    public static final DeferredHolder<Item, Item> POWER_GAUGE =
+            ITEMS.registerSimpleItem("power_gauge", new Item.Properties());
 
+    @SuppressWarnings({"unused"})
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB =
             CREATIVE_TABS.register("main", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.moregrid"))
@@ -40,6 +47,9 @@ public final class ModItems {
                         output.accept(BUZZER.get());
                         output.accept(DIP.get());
                         output.accept(ROTARY_SWITCH.get());
+                        output.accept(DOUBLE_CURRENT_GAUGE.get());
+                        output.accept(DOUBLE_VOLTAGE_GAUGE.get());
+                        output.accept(POWER_GAUGE.get());
                     })
                     .build());
 

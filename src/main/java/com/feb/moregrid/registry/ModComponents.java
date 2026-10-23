@@ -2,6 +2,9 @@ package com.feb.moregrid.registry;
 
 import com.feb.moregrid.MoreGrid;
 import com.feb.moregrid.component.*;
+import com.feb.moregrid.component.additions.guages.DoubleCurrentGaugeComponent;
+import com.feb.moregrid.component.additions.guages.DoubleVoltageGaugeComponent;
+import com.feb.moregrid.component.additions.guages.PowerGaugeComponent;
 import com.feb.moregrid.component.buzzer.BuzzerComponent;
 import com.feb.moregrid.component.rotary.KnobDirection;
 import com.feb.moregrid.component.rotary.RotaryLayout;
@@ -12,6 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.patryk3211.powergrid.circuits.components.ComponentRegistry;
 import org.patryk3211.powergrid.circuits.schematic.ComponentFootprint;
+import org.patryk3211.powergrid.circuits.schematic.PlacedComponent;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -131,6 +135,64 @@ public final class ModComponents {
         }
         return new RotarySwitchComponent(footprints);
     }
+    /**New Gauges*/
+    private static  DoubleCurrentGaugeComponent buildDoubleCurrentGauge() {
+        ComponentFootprint footprint = new ComponentFootprint.Builder(
+                5,
+                5,
+                "component." + MoreGrid.MOD_ID + ".double_current_gauge",
+                null
+        )
+                .addPad(0, 0, 0, "Primary 1", "P1")
+                .addPad(0, 3, 1, "Primary 2", "P2")
+                .addPad(4, 0, 2, "Secondary 1", "S1")
+                .addPad(4, 3, 3, "Secondary 2", "S2")
+                .withItem()
+                .withOutline()
+                .build();
+        return new DoubleCurrentGaugeComponent(footprint) {
+            @Override
+            public float getValue(PlacedComponent placedComponent) {
+                return 0;
+            }
+        };
+    }
+
+    private static DoubleVoltageGaugeComponent buildDoubleVoltageGauge() {
+        ComponentFootprint footprint = new ComponentFootprint.Builder(
+                5,
+                5,
+                "component." + MoreGrid.MOD_ID + ".double_voltage_gauge",
+                null
+        )
+                .addPad(0, 0, 0, "Primary 1", "P1")
+                .addPad(0, 3, 1, "Primary 2", "P2")
+                .addPad(4, 0, 2, "Secondary 1", "S1")
+                .addPad(4, 3, 3, "Secondary 2", "S2")
+                .withItem()
+                .withOutline()
+                .build();
+        return new DoubleVoltageGaugeComponent(footprint) {
+            @Override
+            public float getValue(PlacedComponent placedComponent) {
+                return 0;
+            }
+        };
+    }
+
+    private static PowerGaugeComponent buildPowerGauge() {
+        ComponentFootprint footprint = new ComponentFootprint.Builder(
+                5, 5,
+                "component." + MoreGrid.MOD_ID + ".power_gauge",
+                null
+        )
+                .addPad(3, 0, 0)
+                .addPad(3, 3, 1)
+                .withItem()
+                .withOutline()
+                .build();
+        return new PowerGaugeComponent(footprint);
+    }
 
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
@@ -144,6 +206,9 @@ public final class ModComponents {
         register(event, "buzzer", buildBuzzer());
         register(event, "dip", buildDip());
         register(event, "rotary_switch", buildRotarySwitch());
+        register(event,"double_voltage_gauge",buildDoubleVoltageGauge());
+        register(event,"double_current_gauge",buildDoubleCurrentGauge());
+        register(event,"power_gauge",buildPowerGauge());
     }
 
     private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {
